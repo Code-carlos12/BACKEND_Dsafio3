@@ -40,11 +40,9 @@ class ProductManager {
       };
 
       if (products.find((product) => product.code === code)) {
-        console.log(`The product with code: ${product.code} already exists`);
-        throw new Error(
-          `The product with code: ${product.code} already exists`
-        );
-      }
+        return console.log(`The product with code: ${product.code} already exists`);
+        
+      } else{
       products.push(product);
       await fs.promises.writeFile(
         ProductManager.#path,
@@ -52,8 +50,9 @@ class ProductManager {
       );
 
       return console.log(products);
-    } catch (err) {
-      throw err;
+      }
+    } catch (error) {
+      return console.log(error);
     }
   };
 
@@ -78,13 +77,13 @@ class ProductManager {
       );
 
       if (itemId === undefined) {
-        console.log(`Product with id: ${id} does not exist`);
-        throw new Error(`Product with id: ${id} does not exist`);
+        return console.log(`Product with id: ${id} does not exist`);
+        
       }
       console.log(itemId);
       return itemId;
-    } catch (err) {
-      throw err;
+    } catch (error) {
+      return console.log(error)
     }
   };
 
@@ -95,14 +94,14 @@ class ProductManager {
 
       if (index === -1) {
         console.log(`Product with id: ${id} does not exist`);
-        throw new Error(`Product with id: ${id} does not exist`);
+        return `Product with id: ${id} does not exist`;
       }
       if (
         propsProduct.hasOwnProperty("id") ||
         propsProduct.hasOwnProperty("code")
       ) {
-        console.log("Cannot update 'id' or 'code' property");
-        throw new Error("Cannot update 'id' or 'code' property");
+        return console.log("Cannot update 'id' or 'code' property");
+        
       }
 
       Object.assign(products[index], propsProduct);
@@ -115,8 +114,8 @@ class ProductManager {
 
       console.log(updatedProduct);
       return updatedProduct;
-    } catch (err) {
-      throw err;
+    } catch (error) {
+      return console.error(error);
     }
   };
 
@@ -129,7 +128,7 @@ class ProductManager {
 
       if (!product) {
         console.log("Product does not exist");
-        throw new Error("Product does not exist");
+        return "Product does not exist";
       }
 
       products = products.filter((item) => item.id !== id);
@@ -141,8 +140,8 @@ class ProductManager {
 
       console.log("Product removed");
       return "Product removed";
-    } catch (err) {
-      throw err;
+    } catch (error) {
+      return console.log(error)
     }
   };
 
@@ -155,7 +154,7 @@ class ProductManager {
 
       if (productIndex === -1) {
         console.log("Product does not exist");
-        throw new Error("Product does not exist");
+         return "Product does not exist"
       }
 
       products[productIndex].status = false;
@@ -168,8 +167,8 @@ class ProductManager {
 
       console.log("Product logically removed");
       return "Product logically removed";
-    } catch (err) {
-      throw err;
+    } catch (error) {
+      return console.error(error);
     }
   };
 }
