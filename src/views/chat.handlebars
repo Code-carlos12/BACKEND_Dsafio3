@@ -1,8 +1,6 @@
-
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
         <a href="./">
-        <!--modificar la direccion  de la imagen -->
             <img src="./static/imagenes/logo.png" width="50px" alt="logo"
                 class="d-inline-block align-text-top me-3 header__img" />
         </a>
@@ -10,7 +8,7 @@
     <div class="d-flex collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav align-items-center header__lista">
             <li class="nav-item ms-3 header__item">
-                <a class="nav-link active" href="./">Inicio</a>
+                <a class="nav-link" href="./">Inicio</a>
             </li>
             <li class="nav-item ms-3 header__item">
                 <a class="nav-link" href="./realTimeProducts">RealTime</a>
@@ -19,7 +17,7 @@
                 <a class="nav-link" href="./form">Cargar</a>
             </li>
             <li class="nav-item ms-3 header__item">
-                <a class="nav-link" href="./chat">Chat</a>
+                <a class="nav-link active" href="./chat">Chat</a>
             </li>
         </ul>
     </div>
@@ -27,22 +25,21 @@
 
 <br>
 
-<h1 class="text-center">Lista de productos asincronos</h1>
+<h1 class="text-center"><b id="username"></b> Chat</h1>
 
-<div>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-        {{#each products}}
-        {{#if status}}
-        <div class="card" style="margin: 10px 100px">
-            <img src={{thumbnail}} width="200px" alt="img - {{thumbnail}}">
-            <div class="card-body">
-                <p class="card-title">{{category}} - {{title}}</p>
-                <p class="card-text">{{description}}</p>
-                <button type="button" class="btn btn-primary">Info</button>
-            </div>
+<div style="display: flex; flex-direction: row; justify-content: space-around;">
+    <div>
+        <b>Escribe algo:</b>
+        <input id="chatbox">
+    </div>
+    <div class="card" style="box-shadow: 0px 0px 10px #969696">
+        <div><p class="text-center m-0"><b>Historial</b></p></div>
+        <hr style="margin: 2px 0 2px 0;">
+        <div id="logs" style="margin: 5px; width: 400px; height: 300px; overflow: auto;">
+            {{#each messages}}
+            <p><b>{{user}}:</b> {{message}}<i style="font-size: x-small; margin-left: 5px;">{{hour}}</i></p>
+            {{/each}}
         </div>
-        {{/if}}
-        {{/each}}
     </div>
 </div>
 
@@ -51,3 +48,10 @@
         <p class="m-0 name">Atlas Tech | 2023</p>
     </div>
 </footer>
+
+{{!-- SweetAlert --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{{!-- Socket.io --}}
+<script src="/socket.io/socket.io.js"></script>
+{{!-- Logica de Socket.io --}}
+<script src="/static/js/chat.js"></script>
