@@ -67,7 +67,7 @@ class ProductManager{
         try {
             const productDeleted = await ProductModel.findByIdAndDelete(id);
 
-            if(!productDeleted){
+            if(productDeleted === null){
                 return console.log("Product does not exist")
             }
             return "Product removed successfully";
@@ -83,8 +83,11 @@ class ProductManager{
         if(!product){
             return console.log("Product does not exist");
         }
+
         product.status  = false;
+
         await product.save();
+        
         return console.lod("Product status updated successfully");
       } catch (error) {
         return console.log(error);
