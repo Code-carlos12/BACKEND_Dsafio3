@@ -12,6 +12,7 @@ const router = (app) =>{
     app.use("/api/products", productRouter)
     app.use("/api/carts", cartRouter)
     app.use("/api/mongo/carts", cartRouterMDB)
+    
     app.use("/", viewsControllerAsinc);
     app.use("/realTimeProducts", viewsControllerSinc)
     app.use("/chat", chatRouter)
