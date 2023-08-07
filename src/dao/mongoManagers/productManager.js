@@ -88,7 +88,8 @@ class ProductManager{
 
         await product.save();
         
-        return console.lod("Product status updated successfully");
+        //return console.lod("Product status updated successfully");
+        return true;
       } catch (error) {
         return console.log(error);
       }  
