@@ -1,7 +1,7 @@
 const CartManager = require("../../../dao/mongoManagers/cartManager.js");
 const cartManager = new CartManager();
 const { Router} =  require("express");
-const router = router();
+const router = Router();
 
 router.get("/:id", async (req, res) => {
     //modifivar el id
