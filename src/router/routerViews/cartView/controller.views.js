@@ -5,7 +5,7 @@ const router = Router();
 
 router.get("/:id", async (req, res) => {
     //modifivar el id
-    const id = "64d0584086f7aabe84215ef3"
+    const id = "64d2e74c7121e48a5941e943"
     const cart = await cartManager.getCartById(id)
     res.render("cart", cart);
   });

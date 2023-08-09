@@ -63,7 +63,7 @@ class CartManager{
 
             const newCart = await CartModel.findByIdAndUpdate(idCart, cart)
 
-            return "Cart products updated"
+            return true;
         } catch (error) {
             return console.log(error)
         }

@@ -1,7 +1,7 @@
 const { response } = require("express");
 
 const addProduct = (id) => {
-    const cid = "64d0584086f7aabe84215ef3";
+    const cid = "64d2e74c7121e48a5941e943";
     const pid = id;
 
     const request = {
@@ -24,7 +24,7 @@ const addProduct = (id) => {
 };
 
 const deleteProduct = (id) => {
-    const cid = "64d0584086f7aabe84215ef3";
+    const cid = "64d2e74c7121e48a5941e943";
     const pid = id;
 
     const request = {
