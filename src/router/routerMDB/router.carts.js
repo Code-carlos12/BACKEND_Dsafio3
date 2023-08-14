@@ -5,38 +5,12 @@ const productManager = new ProductManager();
 const { Router } = require("express");
 const router = Router();
 
-
-router.get("/", async (req, res) => {
-    try {
-      const carts = await cartManager.getCarts();
-      console.log(carts);
-      res.status(200).json(carts);
-    } catch (err) {
-      res.status(500).json({ error500: "error de servidor" });
-    }
-});
-
-
-router.get("/:cid", async (req, res) => {
-    let { cid } = req.params;
-  
-    try {
-      const cart = await cartManager.getCartById(cid);
-      res.status(200).json(cart);
-    } catch (err) {
-        if (err.message.includes("Cart with id")) {
-            res.status(404).json({ error404: err.message });
-        }
-    }
-});
-
-
 router.post("/", async (req, res) => {
   try {
     const newCart = await cartManager.createCart();
-    res.status(200).json("Se creó un nuevo carrito.");
+    res.status(200).json("A new cart was created");
   } catch (err) {
-    res.status(500).json({ error500: "error de servidor" });
+    res.status(400).json({ error400: "Error creating cart" });
   }
 });
 
@@ -44,22 +18,44 @@ router.post("/:cid/product/:pid", async (req, res) => {
   const { cid, pid } = req.params;
   const quantity = req.body.quantity || 1;
   try {
-    const updatedCar = await cartManager.updateCart(cid, pid, quantity);
-    res.status(200).json("Producto agragado al carrito")
+    const updatedCart = await cartManager.updateCart(cid, pid, quantity);
+    res.status(200).json("Products added to cart");
   } catch (err) {
     if (err.message.includes("Cart with id")) {
-        res.status(404).json({ error404: err.message });
-      }
+      res.status(404).json({ error404: err.message });
+    }
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const carts = await cartManager.getCarts();
+    console.log(carts);
+    res.status(200).json(carts);
+  } catch (err) {
+    res.status(400).json({ error400: "Bad Request" });
+  }
+});
+
+router.get("/:cid", async (req, res) => {
+  let { cid } = req.params;
+
+  try {
+    const cart = await cartManager.getCartById(cid);
+    res.status(200).json(cart);
+  } catch (err) {
+    if (err.message.includes("Cart with id")) {
+      res.status(404).json({ error404: err.message });
+    }
+  }
+});
 
 router.delete("/:cid", async (req, res) => {
   const { cid } = req.params;
   try {
     let status = await cartManager.deleteProducts(cid);
 
-    res.status(200).json(`Se eliminó el carrito con id: ${cid}`);
+    res.status(200).json(`Cart with id: ${cid} was removed`);
   } catch (err) {
     if (err.message.includes("Cart does")) {
       res.status(404).json({ error400: err.message });
@@ -68,10 +64,11 @@ router.delete("/:cid", async (req, res) => {
 });
 
 router.delete("/:cid/products/:pid", async (req, res) => {
-  const { cid, pid} = req.params
+  const { cid, pid } = req.params;
   try {
     const status = await cartManager.deleteProduct(cid, pid);
-    res.status(200).json(`Se elimino el producto con el id: ${pid}`)
+
+    res.status(200).json(`Product ${pid} removed successfully`);
   } catch (err) {
     if (err.message.includes("Cart with")) {
       res.status(404).json({ error400: err.message });
@@ -80,6 +77,6 @@ router.delete("/:cid/products/:pid", async (req, res) => {
       res.status(404).json({ error400: err.message });
     }
   }
-})
+});
 
-module.exports = router; 
+module.exports = router;

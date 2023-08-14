@@ -2,6 +2,8 @@
 
 <h1 class="text-center">List products</h1>
 
+<br>
+
 <div style="display: flex; justify-content: center; flex-direction: row">
     <form id="form">
         <div class="input-group input-group-sm">
@@ -50,7 +52,8 @@
                 <td>
                     <div style="display: flex; justify-content: space-between;">
                         <a class="btn btn-primary" href="#" role="button">Detail</a>
-                        <button class="btn btn-success" onclick="addProduct('{{{this._id}}}')" role="button">Add to cart</button>
+                        <button class="btn btn-success" onclick="addProduct('{{{this._id}}}')" role="button">Add to
+                            cart</button>
                     </div>
                 </td>
                 </tr>
@@ -61,23 +64,23 @@
 </div>
 
 <div style="display: flex; justify-content: center;">
-    <div class="ms-5 mb-5">
+    <div>
         {{#if result.hasPrevPage}}
-        <a class="ms-2" href={{result.prevLink}}>previus</a>
+        <a href={{result.prevLink}}>previus</a>
         {{/if}}
 
         {{#if result.hasPrevPage}}
-        <a class="ms-2" href={{result.prevLink}}>{{result.prevPage}}</a>
+        <a href={{result.prevLink}}>{{result.prevPage}}</a>
         {{/if}}
 
-        <a class="ms-2" href={{result.nextLink}}>{{result.page}}</a>
+        <a href={{result.nextLink}}>{{result.page}}</a>
 
         {{#if result.hasNextPage}}
-        <a class="ms-2" href={{result.nextLink}}>{{result.nextPage}}</a>
+        <a href={{result.nextLink}}>{{result.nextPage}}</a>
         {{/if}}
 
         {{#if result.hasNextPage}}
-        <a class="ms-2" href={{result.nextLink}}>next</a>
+        <a href={{result.nextLink}}>next</a>
         {{/if}}
     </div>
 </div>
